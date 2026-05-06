@@ -1,0 +1,43 @@
+replicaCount: 1
+
+image:
+  repository: registry-lbeivein.d2bfc80.registry.nineapis.ch/workshop/demo-app
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  className: nginx
+  host: ""
+  annotations: {}
+    # kubernetes.io/tls-acme: "true"
+  tls: []
+    # - secretName: workshop-tls
+    #   hosts:
+    #     - workshop.example.com
+
+config:
+  title: "NKE Workshop"
+  theme_color: "#1a73e8"
+  message: "Welcome to the NKE Kubernetes Workshop!"
+
+persistence:
+  enabled: true
+  storageClass: ""
+  accessMode: ReadWriteOnce
+  size: 1Gi
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    memory: 128Mi
+
+serviceAccount:
+  create: true
+  name: ""

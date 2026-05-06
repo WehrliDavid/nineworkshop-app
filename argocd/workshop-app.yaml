@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: workshop-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    # Point this to your git repo containing the Helm chart
+    repoURL: https://github.com/ninech/workshop.git
+    targetRevision: main
+    path: helm/workshop-app
+    helm:
+      valuesObject:
+        image:
+          repository: registry-lbeivein.d2bfc80.registry.nineapis.ch/workshop/demo-app
+          tag: "latest"
+        ingress:
+          host: workshop.example.com
+        config:
+          title: "NKE Workshop"
+          message: "Welcome to the NKE Kubernetes Workshop!"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: workshop
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
