@@ -1,4 +1,4 @@
-replicaCount: 1
+replicaCount: 2
 
 image:
   repository: registry-lbeivein.d2bfc80.registry.nineapis.ch/workshop/demo-app
