@@ -1,7 +1,7 @@
 replicaCount: 2
 
 image:
-  repository: registry-lbeivein.d2bfc80.registry.nineapis.ch/workshop/demo-app
+  repository: docker-agi.355592e.registry.nineapis.ch/nineworkshop-app
   tag: "latest"
   pullPolicy: IfNotPresent
 
