@@ -4,6 +4,8 @@ image:
   repository: docker-agi.355592e.registry.nineapis.ch/nineworkshop-app
   tag: "latest"
   pullPolicy: IfNotPresent
+  pullSecrets:
+    - name: regcred
 
 service:
   type: ClusterIP
