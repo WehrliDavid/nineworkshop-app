@@ -5,10 +5,6 @@ metadata:
   labels:
     {{- include "workshop-app.labels" . | nindent 4 }}
 spec:
-  {{- with .Values.image.pullSecrets }}
-  imagePullSecrets:
-    {{- toYaml . | nindent 8 }}
-  {{- end }}
   replicas: {{ .Values.replicaCount }}
   {{- if .Values.persistence.enabled }}
   strategy:
@@ -24,6 +20,10 @@ spec:
       labels:
         {{- include "workshop-app.selectorLabels" . | nindent 8 }}
     spec:
+      {{- with .Values.image.pullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       serviceAccountName: {{ include "workshop-app.serviceAccountName" . }}
       securityContext:
         fsGroup: 1000
